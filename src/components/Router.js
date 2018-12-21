@@ -1,3 +1,5 @@
+// Stopped at Video 10 and did not view video #11
+
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import StorePicker from './StorePicker';
