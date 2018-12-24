@@ -28,6 +28,15 @@ class App extends React.Component {
         this.setState( { fishes: sampleFishes })
     }
 
+    addToOrder = (key) => {
+        // 1. Take a copy of state
+        const order = {...this.state.order}
+        // 2. Either add to the order or update the number in our order
+        order[key] = order[key] + 1 || 1
+        // 3. Call setState to update our state object
+        this.setState({order})
+    }
+
     render() {
         console.log('[matt] ', this.state.fishes)
         
@@ -40,7 +49,9 @@ class App extends React.Component {
                             return (
                                     <Fish 
                                         key={key} 
+                                        index={key}
                                         details={this.state.fishes[key]}
+                                        addToOrder={this.addToOrder}
                                     />
                             )
                         })}
