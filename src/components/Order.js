@@ -16,9 +16,7 @@ class Order extends React.Component {
         }
 
         return <li key={key}>
-            {count} lbs {fish.name}
-
-            {formatPrice(count * fish.price)}
+            {count} lbs {fish.name} {formatPrice(count * fish.price)}
         </li>
     }
 
@@ -43,8 +41,7 @@ class Order extends React.Component {
                     {orderIds.map(this.renderOrder)}
                 </ul>
                 <div className='total'>
-                    Total:
-                    <strong>{formatPrice(total)}</strong>
+                    Total: <strong>{formatPrice(total)}</strong>
                 </div>
             </div> 
         )
