@@ -15,6 +15,14 @@ class App extends React.Component {
 
     componentDidMount() {
         const { params } = this.props.match
+        //first reinstate our localStorage
+        const localStorageRef = localStorage.getItem(params.storeId)
+        console.log('[matt] ', localStorageRef)
+
+        if (localStorageRef) {
+            this.setState({ order: JSON.parse(localStorageRef)})
+        }
+        
 
         this.ref = base.syncState(`${params.storeId}/fishes`, {
             context: this,
@@ -24,6 +32,14 @@ class App extends React.Component {
 
     componentWillUnmount() {
         base.removeBinding(this.ref)
+    }
+
+    componentDidUpdate() {
+        // Pattern for Adding Local Storage:
+        // 1. In ComponentDidUpdate(), localStorage.setItem(key, value)
+        // 2. In ComponentDidMount(), localStorageRef = localStorage.getItem(ID)
+        // 3. If localStorageRef, setState(value) 
+        localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order))
     }
 
     addFish = (fish) => {
@@ -77,6 +93,7 @@ class App extends React.Component {
                 <Inventory 
                     addFish={this.addFish} 
                     loadSampleFishes={this.loadSampleFishes} 
+                    fishes={this.state.fishes}
                 />
             </div>
         )
