@@ -53,6 +53,25 @@ class App extends React.Component {
         })
     }
 
+    updateFish = (key, updatedFish) => {
+        // Common update the state pattern: Copy, Update, Set
+        // 1. Take a copy of the current state
+        const fishes = {...this.state.fishes}
+        // 2. Update that state
+        fishes[key] = updatedFish
+        // 3. Set that to state
+        this.setState({fishes})
+    }
+
+    deleteFish = (key) => {
+        // 1. Take a copy of the current state
+        const fishes = {...this.state.fishes}
+        // 2. Update the state
+        fishes[key] = null
+        // 3. Set that to state
+        this.setState({ fishes })
+    }
+
     loadSampleFishes = () => {
         this.setState( { fishes: sampleFishes })
     }
@@ -64,6 +83,15 @@ class App extends React.Component {
         order[key] = order[key] + 1 || 1
         // 3. Call setState to update our state object
         this.setState({order})
+    }
+
+    deleteFromOrder = (key) => {
+        // 1. Take a copy of the current state
+        const order = {...this.state.order}
+        // 2. Update the state
+        delete order[key]
+        // 3. Set that to state
+        this.setState({ order })
     }
 
     render() {
@@ -89,9 +117,12 @@ class App extends React.Component {
                 <Order 
                     fishes={this.state.fishes} 
                     order={this.state.order} 
+                    deleteFromOrder={this.deleteFromOrder}
                 />
                 <Inventory 
                     addFish={this.addFish} 
+                    updateFish={this.updateFish} // This function updates the fish from EditFishForm
+                    deleteFish={this.deleteFish}
                     loadSampleFishes={this.loadSampleFishes} 
                     fishes={this.state.fishes}
                 />

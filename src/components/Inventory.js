@@ -7,7 +7,15 @@ class Inventory extends React.Component {
         return ( 
             <div className='inventory'>
                 <h2>Inventory</h2>
-                {Object.keys(this.props.fishes).map(fish => <EditFishForm />)}
+                {Object.keys(this.props.fishes).map(key => 
+                    <EditFishForm 
+                        key={key} 
+                        index={key}
+                        fish={this.props.fishes[key]} 
+                        updateFish={this.props.updateFish} 
+                        deleteFish={this.props.deleteFish}
+                    />
+                )}
                 <AddFishForm 
                     addFish={this.props.addFish} 
                 />
@@ -19,4 +27,4 @@ class Inventory extends React.Component {
     }
 }
  
-export default Inventory;
+export default Inventory
