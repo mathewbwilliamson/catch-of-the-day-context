@@ -21,3 +21,22 @@
   &.order-exit-active
     transform: translate(120%)
     padding 0 !important
+
+.count-enter
+  background red
+  transition 0.5s
+  transform: translateY(100%)
+
+  &.count-enter-active
+    background yellow
+    transform: translateY(0)
+
+.count-exit
+  transition 0.5s
+  transform: translateY(0)
+  position absolute
+  left 0
+  bottom 0
+
+  &.count-exit-active
+    transform: translateY(-100%)
